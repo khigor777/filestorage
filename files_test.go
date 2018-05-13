@@ -3,14 +3,19 @@ package filestorage
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 )
 
 func TestNewFileStorage(t *testing.T) {
 	f, err := NewFileStorage("mock")
-	assert.Nil(t, err)
+	if err != nil{
+		t.Error(err)
+	}
 
 	b, err := f.Get("mock.json")
-	assert.Nil(t, err)
-	assert.NotEmpty(t, b)
+	if err != nil{
+		t.Error(err)
+	}
+	if len(b) <=0 {
+		t.Error("file is empty")
+	}
 }
